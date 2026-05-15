@@ -14,7 +14,7 @@ app.post("/otp/send", async (req, res) => {
   const { phoneNumber } = req.body;
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-  await redis.set(otpKey(phoneNumber), otp, "EX", 30); // OTP expires in 30 seconds
+  await redis.set(otpKey(phoneNumber), otp, "EX", 30,); // OTP expires in 30 seconds
   res.json({ message: `OTP sent to ${phoneNumber}`, otp });
 });
 
@@ -41,3 +41,4 @@ app.get("/otp/:phone/ttl", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
